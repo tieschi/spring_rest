@@ -1,5 +1,5 @@
 target/
-src/main/java/com/tiesch/spring/rest/smth/
+src/main/java/com/tiesch/spring/rest/smth
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
