@@ -9,7 +9,6 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -36,7 +35,6 @@ public class HibernateConf {
 
         properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
         properties.put("hibernate.show_sql", "true");
-//        properties.put("hibernate.hbm2ddl.auto", "create");
 
         entityManagerFactoryBean.setDataSource(dataSource());
         entityManagerFactoryBean.setPackagesToScan("com.tiesch.spring.rest.model");
@@ -54,6 +52,4 @@ public class HibernateConf {
         return transactionManager;
 
     }
-
-
 }

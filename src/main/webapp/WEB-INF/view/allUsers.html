@@ -27,13 +27,27 @@
                     <th>Name</th>
                     <th>Surname</th>
                     <th>Age</th>
+                    <th>Options</th>
                 </tr>
                 <tr th:each="user:${users}">
+
+
+
                     <td th:utext="${user.getName()}"></td>
                     <td th:utext="${user.getSurname()}"></td>
                     <td th:utext="${user.getAge()}"></td>
+                    <td>
+                        <form th:action="@{/users/delete/{id}(id=${user.getId()})}">
+                            <input type="submit" value="Delete">
+                        </form>
+                        <form th:action="@{/users/update/{id}(id=${user.getId()})}">
+                            <input type="submit" value="Update">
+                        </form>
+                    </td>
                 </tr>
             </table>
+            <br>
+            <input type="button" value="add" onclick="window.location.href = 'addUser'"/>
         </div>
     </body>
 </html>
