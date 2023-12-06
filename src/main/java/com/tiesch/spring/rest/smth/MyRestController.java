@@ -1,7 +1,7 @@
-package com.tiesch.spring.rest.controller;
+package com.tiesch.spring.rest.smth;
 
-import com.tiesch.spring.rest.exception.IncorrectData;
-import com.tiesch.spring.rest.exception.NoUserException;
+import com.tiesch.spring.rest.smth.exception.IncorrectData;
+import com.tiesch.spring.rest.smth.exception.NoUserException;
 import com.tiesch.spring.rest.model.User;
 import com.tiesch.spring.rest.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
