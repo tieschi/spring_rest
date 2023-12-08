@@ -13,8 +13,12 @@ import javax.validation.Valid;
 @Controller
 public class UserController {
 
-    @Autowired
-    UserService userService;
+    private final UserService userService;
+
+    @Autowired()
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/users")
     public String showAllUsers(Model model) {
@@ -31,16 +35,16 @@ public class UserController {
         return "info";
     }
 
-    @RequestMapping("/deleteInfo")
-    public String deleteUser(@RequestParam("userId") int id) {
+    @RequestMapping("/delete")
+    public String deleteUser(@RequestParam("id") int id) {
 
         userService.deleteUser(id);
 
         return "redirect:/users";
     }
 
-    @RequestMapping("/updateInfo")
-    public String updateUser(@RequestParam("userId") int id, Model model) {
+    @RequestMapping("/update")
+    public String updateUser(@RequestParam("id") int id, Model model) {
 
         User user = userService.getUser(id);
         model.addAttribute("user", user);

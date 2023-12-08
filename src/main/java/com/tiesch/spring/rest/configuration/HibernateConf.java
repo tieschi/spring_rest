@@ -4,6 +4,9 @@ package com.tiesch.spring.rest.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -11,20 +14,29 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import java.util.Objects;
 import java.util.Properties;
 
 @Configuration
+@PropertySource("classpath:db.properties")
 @ComponentScan(basePackages = "com.tiesch.spring.rest")
 @EnableTransactionManagement
 public class HibernateConf {
 
+    private final Environment env;
+
+    public HibernateConf(Environment env) {
+        this.env = env;
+    }
+
+
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/my_db?verifyServerCertificate=false&useSSL=false&requireSSL=false&useLegacyDatetimeCode=false&amp&serverTimezone=UTC");
-        dataSource.setUsername("bestuser");
-        dataSource.setPassword("bestuser");
+        dataSource.setDriverClassName(Objects.requireNonNull(env.getProperty("db.driver")));
+        dataSource.setUrl(env.getProperty("db.url"));
+        dataSource.setUsername(env.getProperty("db.username"));
+        dataSource.setPassword(env.getProperty("db.password"));
         return dataSource;
     }
 
@@ -52,4 +64,9 @@ public class HibernateConf {
         return transactionManager;
 
     }
+
+//    @Bean
+//    public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
+//        return new PersistenceExceptionTranslationPostProcessor();
+//    }
 }
