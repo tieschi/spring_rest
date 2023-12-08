@@ -1,6 +1,9 @@
 package com.tiesch.spring.rest.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+
 
 @Entity
 @Table(name = "users")
@@ -10,10 +13,13 @@ public class User {
     @Column(name = "id")
     private int id;
     @Column(name = "name")
+    @Pattern(regexp = "[a-zA-Z]+", message = "the name cannot be empty and should consist only of letters")
     private String name;
     @Column(name = "surname")
+    @Pattern(regexp = "[a-zA-Z]+", message = "the surname cannot be empty and should consist only of letters")
     private String surname;
     @Column(name = "age")
+    @Min(value = 18, message = "The age must be over 18")
     private int age;
 
     public User() {

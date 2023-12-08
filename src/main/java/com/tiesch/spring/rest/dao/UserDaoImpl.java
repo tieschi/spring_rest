@@ -20,12 +20,7 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public void addUser(User user) {
-        User user1 = getUser(user.getId());
-        if (user1 != null) {
-            entityManager.merge(user);
-        } else {
-            entityManager.persist(user);
-        }
+        entityManager.merge(user);
     }
 
     @Override
@@ -34,10 +29,7 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public void deleteUser(int id) {
-        User user = getUser(id);
-        if (user != null) {
-            entityManager.remove(user);
-        }
+    public void deleteUser(User user) {
+        entityManager.remove(user);
     }
 }
