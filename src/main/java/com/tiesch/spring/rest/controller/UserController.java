@@ -53,7 +53,7 @@ public class UserController {
     }
 
     @PostMapping("/saveUser")
-    public String saveUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
+    public String saveUser(@Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "info";
         } else {
