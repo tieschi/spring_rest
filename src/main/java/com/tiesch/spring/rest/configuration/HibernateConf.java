@@ -6,7 +6,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -45,8 +44,9 @@ public class HibernateConf {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         Properties properties = new Properties();
 
-        properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
-        properties.put("hibernate.show_sql", "true");
+        properties.put("hibernate.dialect", env.getProperty("db.dialect"));
+        properties.put("hibernate.show_sql", env.getProperty("db.show_sql"));
+        properties.put("hibernate.hbm2ddl.auto", env.getProperty("db.hbm2ddl.auto"));
 
         entityManagerFactoryBean.setDataSource(dataSource());
         entityManagerFactoryBean.setPackagesToScan("com.tiesch.spring.rest.model");
